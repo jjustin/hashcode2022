@@ -1,4 +1,5 @@
-from models import Skill, Contributer, Project
+from typing import List
+from models import Contributor, Skill, Project
 
 
 def read_inputs(filename="input_data/a_an_example.in.txt"):
@@ -7,7 +8,7 @@ def read_inputs(filename="input_data/a_an_example.in.txt"):
     num_contributors, num_projects = map(int, f.readline().split(" "))
 
     # Create contributors
-    contributors = []
+    contributors: List[Contributor] = []
     for i in range(num_contributors):
         contributor_params = f.readline().split(" ")
         contributor_name = contributor_params[0]
@@ -21,11 +22,11 @@ def read_inputs(filename="input_data/a_an_example.in.txt"):
             skill = Skill(skill_name, skill_level)
             skills.append(skill)
 
-        contributer = Contributer(contributor_name, skills)
+        contributer = Contributor(contributor_name, skills)
         contributors.append(contributer)
 
     # Create projects
-    projects = []
+    projects: List[Project] = []
     for i in range(num_projects):
         project_name, di, si, bi, ri = f.readline().split(" ")
         n_roles = int(ri)

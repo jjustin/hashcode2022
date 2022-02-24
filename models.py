@@ -10,7 +10,7 @@ class Skill:
         return f"{self.name}-{self.level}"
 
 
-class Contributer:
+class Contributor:
     def __init__(self, name: str, skills: List[Skill]) -> None:
         self.name = name
         self.skills = skills
@@ -19,6 +19,9 @@ class Contributer:
     def __str__(self) -> str:
         skills_string = ', '.join([str(x) for x in self.skills])
         return f"{self.name}: {skills_string}"
+
+    def is_free(self, today):
+        return today > self.free_after
 
 
 class Project:
@@ -29,6 +32,10 @@ class Project:
         self.needs_days = needs_days
         self.score_worth = score_worth
         self.n_roles = n_roles
+        self.contributors: List[Contributor] = []
 
     def __str__(self) -> str:
         return f"{self.name} {self.n_roles}"
+
+    def is_doable_before_deadline(self, today):
+        return today + self.needs_days < self.best_before
