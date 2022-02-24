@@ -45,6 +45,9 @@ class Project:
         self.contributors: List[Contributor] = []
         self.done = False
 
+    def __lt__(self, other):
+        return self.best_before < other.best_before
+
     def __str__(self) -> str:
         return f"{self.name} {self.n_roles}"
 

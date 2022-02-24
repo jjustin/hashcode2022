@@ -90,14 +90,15 @@ def run(projects: List[models.Project], contributors: List[models.Contributor], 
 
 if __name__ == "__main__":
     for filename in [
-        "a_an_example",
-        "b_better_start_small",
-        "c_collaboration",
+        # "a_an_example",
+        # "b_better_start_small",
+        # "c_collaboration",
         "d_dense_schedule",
-        "e_exceptional_skills",
-        "f_find_great_mentors"
+        # "e_exceptional_skills",
+        # "f_find_great_mentors"
     ]:
         contrs, projects = hcio.read_inputs(f"input_data/{filename}.in.txt")
+        projects.sort()
         print(filename)
         out = run(projects, contrs)
         hcio.write_outputs(out,
