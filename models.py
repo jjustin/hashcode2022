@@ -46,10 +46,10 @@ class Project:
         self.done = False
 
     def __lt__(self, other):
-        return self.best_before < other.best_before
+        return self.needs_days < other.needs_days
 
     def __str__(self) -> str:
         return f"{self.name} {self.n_roles}"
 
     def is_doable_before_deadline(self, today):
-        return today + self.needs_days < self.best_before
+        return today + self.needs_days < self.best_before + (self.score_worth/2)

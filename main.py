@@ -3,7 +3,7 @@ import models
 import hcio
 
 MAX_LEVEL = 100
-MAX_DAYS = 10000
+MAX_DAYS = 100
 MAX_REROLLS = 5
 
 
@@ -80,7 +80,8 @@ def run(projects: List[models.Project], contributors: List[models.Contributor], 
             out += "\n"
             done_projects += 1
 
-        projects = filter(lambda p: (not p.done), projects)
+        projects = filter(lambda p: (
+            not p.done and p.is_doable_before_deadline(today+1)), projects)
         projects = [p for p in projects]
 
         if len(projects) == 0:
@@ -93,9 +94,9 @@ if __name__ == "__main__":
         # "a_an_example",
         # "b_better_start_small",
         # "c_collaboration",
-        "d_dense_schedule",
+        # "d_dense_schedule",
         # "e_exceptional_skills",
-        # "f_find_great_mentors"
+        "f_find_great_mentors"
     ]:
         contrs, projects = hcio.read_inputs(f"input_data/{filename}.in.txt")
         projects.sort()
